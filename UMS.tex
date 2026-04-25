@@ -1,0 +1,187 @@
+\documentclass[12pt]{article}
+
+\usepackage[a4paper, margin=0.85in]{geometry}
+\usepackage{longtable}
+\usepackage{setspace}
+\usepackage{titlesec}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{titling}
+
+\setstretch{1.1}
+
+% Reduce spacing around sections
+\titlespacing*{\section}{0pt}{0.5em}{0.3em}
+\titlespacing*{\subsection}{0pt}{0.4em}{0.2em}
+
+% Reduce list spacing
+\setlist[itemize]{noitemsep, topsep=2pt}
+
+% Reduce paragraph spacing
+\setlength{\parskip}{0.3em}
+\setlength{\parindent}{0pt}
+
+% Table spacing
+\setlength{\tabcolsep}{6pt}
+\renewcommand{\arraystretch}{0.9}
+
+\title{\textbf{University Management System}}
+\date{}
+
+\setlength{\droptitle}{-7em}
+
+\begin{document}
+
+\maketitle
+\vspace{-7.5em}
+
+\noindent \textbf{Course:} Database Systems \\
+\textbf{Group No:} 12 \\ \\
+\textbf{Group Members:} \\
+Harshit Grover - 2024A7PS0550G \\
+Atharv Consul - 2024A7PS0590G \\
+Sidakbir Singh Bains - 2024A7PS0570G \\
+Mayank Sharma - 2024A7PS0627G \\
+Aayush Aggarwal - 2024A7PS0530G \\
+Dhairya Singh - 2024A7PS0497G \\
+Naitik Gupta - 2024A7PS0603G \\ \\
+\textbf{GitHub Repository:} \href{https://github.com/harshitgrover/University-Management-System}{University Management System} 
+\vspace{0.5em}
+
+\section*{1. Project Overview}
+
+The University Management System is a full-stack web application designed to manage academic and administrative workflows in a university environment. The system supports role-based access for administrators, professors, and students. It includes user authentication, profile management, course management, timetable management, fee handling, announcements, placement/job workflows, and an AI-powered student resume builder using Ollama.
+
+The main objective of the project is to demonstrate practical DBMS concepts through a working application that uses a MongoDB database, backend APIs, and a React-based frontend interface.
+
+\section*{2. Technology Used}
+
+\subsection*{Frontend}
+
+The frontend is developed using \textbf{React} with \textbf{Vite}. It provides separate dashboards and pages for different users, including admin, professor, and student views. The frontend communicates with the backend using REST API calls and stores the authentication token in the browser for protected requests.
+
+Main frontend modules include:
+
+\begin{itemize}
+\item Login form and role-based navigation
+\item Admin dashboard
+\item Professor dashboard
+\item Student dashboard and student portal
+\item Student timetable page
+\item Student resume builder page
+\end{itemize}
+
+\subsection*{Backend}
+
+The backend is built using \textbf{Node.js} and \textbf{Express.js}. It exposes REST APIs for authentication and role-specific operations. The backend uses \textbf{JWT} for authentication, \textbf{bcryptjs} for password hashing, \textbf{Mongoose} for database operations, \textbf{PDFKit} for resume and receipt PDF generation, and \textbf{Ollama} for AI-assisted resume content generation.
+
+Main backend folders include:
+
+\begin{itemize}
+\item \texttt{route/} - API routes for admin, professor, and student users
+\item \texttt{middleware/} - JWT authentication and role-checking middleware
+\item \texttt{db/} - database schemas and models
+\item \texttt{scripts/seed.js} - sample data insertion script
+\item \texttt{test/} - backend test files
+\end{itemize}
+
+\subsection*{Database}
+
+The database used is \textbf{MongoDB}, connected through \textbf{Mongoose}. The database stores users, courses, enrollments, timetables, announcements, fees, jobs, and job applications.
+
+Important database collections/models include:
+
+\begin{itemize}
+\item \texttt{User}
+\item \texttt{Course}
+\item \texttt{TakenCourse}
+\item \texttt{Timetable}
+\item \texttt{Announcement}
+\item \texttt{Fee}
+\item \texttt{Job}
+\item \texttt{JobApplication}
+\end{itemize}
+
+The schemas include validation rules, role-specific fields, and uniqueness constraints such as unique email IDs, roll numbers, employee IDs, course codes, and fee demand numbers.
+
+\section*{3. User Roles and Privileges}
+
+\subsection*{Admin}
+
+The admin has the highest level of access in the system. Admin users can create and manage students, professors, courses, timetable entries, fee demands, and placement/job records. Admins can also view users and update or delete records where required.
+
+\subsection*{Professor}
+
+Professors can log in to view the courses assigned to them. They can see students enrolled in their courses, update marks and grades, and create announcements for their courses.
+
+\subsection*{Student}
+
+Students can log in to view their profile, enrolled courses, announcements, timetable, fee details, and placement opportunities. Students can register for available courses, apply for jobs, update placement application status, fulfill fee demands, download fee receipts, and generate resumes.
+
+\subsection*{Authentication and Authorization}
+
+The system uses JWT-based authentication. After login, a token is generated and used for protected API requests. Middleware checks whether the user is authenticated and whether the user has the correct role before allowing access to protected routes.
+
+\section*{4. Modules Developed}
+
+\subsection*{Authentication Module}
+
+This module handles user login, password verification, JWT token generation, and protected access. Passwords are stored securely using bcrypt hashing.
+
+\subsection*{Middleware Module}
+
+The middleware module verifies JWT tokens and checks user roles. Separate middleware files are used for admin, professor, student, and general authentication checks.
+
+\subsection*{Admin Module}
+
+The admin module supports user management, course management, timetable management, fee generation, fee fulfillment, and placement/job management.
+
+\subsection*{Professor Module}
+
+The professor module allows professors to manage academic tasks related to their assigned courses. Professors can view enrolled students, update marks and grades, and publish announcements.
+
+\subsection*{Student Module}
+
+The student module provides academic and personal services to students. It includes profile viewing, course registration, timetable viewing, announcements, fee status, placement applications, and AI-assisted resume generation.
+
+\subsection*{Resume Builder Module}
+
+The resume builder is one of the main features of the project. It uses Ollama AI to generate polished and truthful resume content from student profile details, academic history, skills, projects, and target role information. The final resume is generated as a PDF using PDFKit.
+
+\subsection*{Database Module}
+
+The database module defines all Mongoose schemas and relationships. It also enforces validation rules and uniqueness constraints to maintain data consistency.
+
+\subsection*{Frontend UI Module}
+
+The frontend module provides dashboards and pages for each user role. It connects to backend APIs and displays relevant information according to the logged-in user's privileges.
+
+\vspace{1em}     % medium
+
+\section*{5. Contribution of Each Member}
+
+\begin{longtable}{|p{4cm}|p{10cm}|}
+\hline
+\textbf{Member} & \textbf{Contribution} \\
+\hline
+Harshit Grover & Worked on database design, ER diagram, and the AI resume builder. Designed MongoDB schemas, managed database logic, seed data, integrated Ollama AI resume generation, and implemented PDF resume generation. \\
+\hline
+Atharv Consul & Worked on backend routes and functions. Implemented REST API logic for admin, professor, and student operations. \\
+\hline
+Sidakbir Singh Bains & Worked on frontend development. Built student-facing pages and connected frontend components with backend APIs. \\
+\hline
+Mayank Sharma & Worked on frontend development. Built admin/professor UI components, styling, and frontend integration. \\
+\hline
+Aayush Aggarwal & Worked on middleware and JWT authentication. Helped implement protected route access and role-based checks. \\
+\hline
+Dhairya Singh & Worked on middleware and JWT authentication. Assisted with token verification and authentication flow testing. \\
+\hline
+Naitik Gupta & Worked on changes and integration. Coordinated frontend-backend integration, fixed cross-module issues, and verified combined workflows. \\
+\hline
+\end{longtable}
+
+\section*{6. Conclusion}
+
+The University Management System successfully combines frontend, backend, and database concepts into one working DBMS project. It demonstrates authentication, authorization, database schema design, CRUD operations, role-based privileges, and real-world academic workflows. The project also includes additional features such as fee management, placement applications, announcements, and resume generation, making it a complete university portal prototype.
+
+\end{document}
